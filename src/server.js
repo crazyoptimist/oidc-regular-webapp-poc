@@ -35,6 +35,7 @@ app.get('/', (req, res) => {
 
 app.get('/profile', (req, res) => {
   const { idToken, decodedIdToken } = req.session;
+  console.log(decodedIdToken);
   res.render('profile', {
     idToken,
     decodedIdToken
@@ -44,7 +45,7 @@ app.get('/profile', (req, res) => {
 app.get('/login', (req, res) => {
   const authorizationEndpoint = oidcProviderInfo['authorization_endpoint'];
   const responseType = 'id_token';
-  const scope = 'openid';
+  const scope = 'openid email picture';
   const clientID = process.env.CLIENT_ID;
   const redirectUri = 'http://localhost:3000/callback';
   const responseMode = 'form_post';
